@@ -1,5 +1,5 @@
-﻿using DataAccess.Concretes;
-using Entity.Abstracts;
+﻿using Core.Entity;
+using DataAccess.Concretes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,8 @@ namespace Business.Concretes
         public void Add(IEntities entity, string name)
         {
             //iş kurallarını işlet 
-            AdoNetDal categoryDal = new AdoNetDal();
-            categoryDal.Add(entity,name);
+            //AdoNetDal categoryDal = new AdoNetDal();
+            //categoryDal.Add(entity,name);
         }
     }
 }

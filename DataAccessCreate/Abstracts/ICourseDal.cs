@@ -1,4 +1,6 @@
-﻿using Entity.Concretes;
+﻿using Core.DataAccess;
+using Entity.Concretes;
+using Entity.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,6 @@ namespace DataAccess.Abstracts
 {
     public interface ICourseDal  :IEntityRepository<Course>
     {
+        List<CourseDetail> GetCourseDetail();
     }
 }

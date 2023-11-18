@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entity.Abstracts;
+using Core.Entity;
 
 namespace Entity.Concretes
 {
@@ -16,6 +16,5 @@ namespace Entity.Concretes
         public double Price { get; set; }
         public string ImageUrl { get; set; }
         public Category category { get; set; }
-        public CourseInstructor[] courseınstructers { get; set; }
     }
 }

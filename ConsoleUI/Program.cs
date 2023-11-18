@@ -16,9 +16,9 @@ namespace ConsoleUI
 
 
             CourseManager courseManager = new CourseManager(new EfCourseDal());
-            foreach (var c in courseManager.GetAll())
+            foreach (var c in courseManager.GetCourseDetail())
             {
-                Console.WriteLine(c.Id);
+                Console.WriteLine(c.CourseId+"-"+c.CourseName+"/"+c.CategoryName);
             }
 
 

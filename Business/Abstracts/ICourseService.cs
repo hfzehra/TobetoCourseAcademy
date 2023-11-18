@@ -1,4 +1,5 @@
 ﻿using Entity.Concretes;
+using Entity.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Business.Abstracts
         void Delete(Course course);
 
         List<Course> GetAll();
+        List<CourseDetail> GetCourseDetail();
     }
 }
