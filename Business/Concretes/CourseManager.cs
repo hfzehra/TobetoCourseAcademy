@@ -1,4 +1,6 @@
 ﻿using Business.Abstracts;
+using Business.Constants;
+using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
 using Entity.DTOs;
@@ -17,29 +19,41 @@ namespace Business.Concretes
         {
             _course = course;
         }
-        public void Add(Course course)
+        public IResult Add(Course course)
         {
             _course.Add(course);
+           return new SuccessResult(Messages.CourseSuccessAdded);
         }
 
-        public void Delete(Course course)
+        public IResult Delete(Course course)
         {
             _course.Delete(course);
+            if (course.Name.Length < 2)
+            {
+                //magic strings
+                return new ErrorResult(Messages.CourseNameValid);
+            }
+            return new SuccessResult(Messages.CourseSuccessDelete);
         }
 
-        public List<Course> GetAll()
+        public IDataResult<List<Course>> GetAll()
         {
-            return _course.GetAll();
+            return new SuccessDataResult<List<Course>>(_course.GetAll());
         }
 
-        public List<CourseDetail> GetCourseDetail()
+        public IDataResult<List<CourseDetail>> GetCourseDetail()
         {
-            return _course.GetCourseDetail();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<CourseDetail>>();
+            }
+            return new SuccessDataResult<List<CourseDetail>>(_course.GetCourseDetail(),Messages.CourseDetailGettAll);
         }
 
-        public void Update(Course course)
+        public IResult Update(Course course)
         {
             _course.Update(course);
+            return new SuccessResult(Messages.CourseSuccessUpdated);
         }
     }
 }

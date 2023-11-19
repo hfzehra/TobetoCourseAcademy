@@ -1,4 +1,5 @@
-﻿using Entity.Concretes;
+﻿using Core.Utilities.Result;
+using Entity.Concretes;
 using Entity.DTOs;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace Business.Abstracts
 {
     public interface ICourseService
     {
-        void Add(Course course);
-        void Update(Course course);
-        void Delete(Course course);
+        IResult Add(Course course);
+        IResult Update(Course course);
+        IResult Delete(Course course);
 
-        List<Course> GetAll();
-        List<CourseDetail> GetCourseDetail();
+        IDataResult<List<Course>> GetAll();
+        IDataResult<List<CourseDetail>> GetCourseDetail();
     }
 }

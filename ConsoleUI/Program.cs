@@ -1,6 +1,7 @@
 ﻿using Business.Concretes;
 using DataAccess.Concretes.EntityFramework;
 using Entity.Concretes;
+using System.Net.Http.Headers;
 
 namespace ConsoleUI
 {
@@ -16,13 +17,14 @@ namespace ConsoleUI
 
 
             CourseManager courseManager = new CourseManager(new EfCourseDal());
-            foreach (var c in courseManager.GetCourseDetail())
+            var result = courseManager.GetCourseDetail();
+            if (result.Success == true)
             {
-                Console.WriteLine(c.CourseId+"-"+c.CourseName+"/"+c.CategoryName);
+                foreach (var c in result.Data)
+                {
+                    Console.WriteLine(c.CourseId + "-" + c.CourseName + "/" + c.CategoryName);
+                }
             }
-
-
-
             //Encapsulation eklecenecek
 
             //entityManager.Add(instructor,instructor.First_Name);
