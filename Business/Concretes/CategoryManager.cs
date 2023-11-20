@@ -1,4 +1,6 @@
 ﻿using Business.Abstracts;
+using Business.Constants;
+using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
 using System;
@@ -16,24 +18,39 @@ namespace Business.Concretes
         {
             _category = category;
         }
-        public void Add(Category category)
+        public IResult Add(Category category)
         {
+            if (category.Name.Length < 2)
+            {
+                return new ErrorResult(Messages.CategoryNameValid);
+            }
             _category.Add(category);
+            return new SuccessResult(Messages.CategorySuccessAdded); 
         }
 
-        public void Delete(Category category)
+        public IResult Delete(Category category)
         {
             _category.Delete(category);
+            return new SuccessResult(Messages.CategorySuccessDelete);
+
         }
 
-        public List<Category> GetAll()
+        public IDataResult<List<Category>> GetAll()
         {
-            return _category.GetAll();
+            return new SuccessDataResult<List<Category>>(_category.GetAll(), Messages.CategorySuccessListed);
         }
 
-        public void Update(Category category)
+        public IDataResult<Category> GetById(int id)
+        {
+            return new SuccessDataResult<Category>(_category.Get(c=> c.Id == id), Messages.CategorySuccessListed);
+        }
+
+        public IResult Update(Category category)
         {
             _category.Update(category);
+            return new SuccessResult(Messages.CategorySuccessUpdated);
+
         }
+
     }
 }

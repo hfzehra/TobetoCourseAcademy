@@ -1,4 +1,6 @@
 ﻿using Business.Abstracts;
+using Business.Constants;
+using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
 using System;
@@ -12,30 +14,42 @@ namespace Business.Concretes
     public class InstructorManager : IInstructorService
     {
         IInstructorDal _instructor;
-
         public InstructorManager(IInstructorDal instructor)
         {
-            _instructor = instructor; 
+            _instructor = instructor;
         }
-
-        public void Add(Instructor instructor)
+        public IResult Add(Instructor instructor)
         {
+            if (instructor.First_Name.Length > 15 && instructor.Last_Name.Length > 15)
+            {
+                return new ErrorResult(Messages.InstructorNameValid);
+            }
             _instructor.Add(instructor);
+            return new SuccessResult(Messages.InstructorSuccessAdded);
         }
 
-        public void Delete(Instructor instructor)
+        public IResult Delete(Instructor instructor)
         {
             _instructor.Delete(instructor);
+            return new SuccessResult(Messages.InstructorSuccessDelete);
+
         }
 
-        public List<Instructor> GetAll()
+        public IDataResult<List<Instructor>> GetAll()
         {
-            return _instructor.GetAll();
+            return new SuccessDataResult<List<Instructor>>(_instructor.GetAll(), Messages.InstructorSuccessListed);
         }
 
-        public void Update(Instructor instructor)
+        public IDataResult<Instructor> GetById(int id)
+        {
+            return new SuccessDataResult<Instructor>(_instructor.Get(c => c.Id == id), Messages.InstructorSuccessListed);
+        }
+
+        public IResult Update(Instructor instructor)
         {
             _instructor.Update(instructor);
+            return new SuccessResult(Messages.InstructorSuccessUpdated);
+
         }
     }
 }
