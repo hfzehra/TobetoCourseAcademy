@@ -41,6 +41,11 @@ namespace Business.Concretes
             return new SuccessDataResult<List<Course>>(_course.GetAll());
         }
 
+        public IDataResult<Course> GetById(int id)
+        {
+            return new SuccessDataResult<Course>(_course.Get(co=>co.Id == id),Messages.CourseSuccessGetById);
+        }
+
         public IDataResult<List<CourseDetail>> GetCourseDetail()
         {
             if (DateTime.Now.Hour == 22)

@@ -17,5 +17,7 @@ namespace Business.Abstracts
 
         IDataResult<List<Course>> GetAll();
         IDataResult<List<CourseDetail>> GetCourseDetail();
+        IDataResult<Course> GetById(int id);
+
     }
 }
