@@ -17,6 +17,12 @@ namespace Business.DependecyResolves.Autofac
         {
             builder.RegisterType<CourseManager>().As<ICourseService>().SingleInstance();
             builder.RegisterType<EfCourseDal>().As<ICourseDal>().SingleInstance();
+
+            builder.RegisterType<InstructorManager>().As<IInstructorService>().SingleInstance();
+            builder.RegisterType<EfInstructorDal>().As<IInstructorDal>().SingleInstance();
+
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
         }
     }
 }

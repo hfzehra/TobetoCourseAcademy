@@ -1,9 +1,12 @@
 ﻿using Business.Abstracts;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstracts;
 using Entity.Concretes;
 using Entity.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +24,7 @@ namespace Business.Concretes
         }
         public IResult Add(Course course)
         {
+            ValidationTool.Validate(new CourseValidator(), course);
             _course.Add(course);
            return new SuccessResult(Messages.CourseSuccessAdded);
         }
@@ -28,11 +32,6 @@ namespace Business.Concretes
         public IResult Delete(Course course)
         {
             _course.Delete(course);
-            if (course.Name.Length < 2)
-            {
-                //magic strings
-                return new ErrorResult(Messages.CourseNameValid);
-            }
             return new SuccessResult(Messages.CourseSuccessDelete);
         }
 
